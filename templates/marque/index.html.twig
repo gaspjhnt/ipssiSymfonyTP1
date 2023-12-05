@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Index Marque {% endblock %}
+
+{% block body %}
+    <h1>Liste des marques</h1>
+    {% if marques is not empty%}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date de création</th>
+                <th>Logo</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for marque in marques %}
+                <tr>
+                    <th>
+                        {{ marque.nom }}
+                    </th>
+                    <th>{{ marque.dateDeCreation|date("d/m/Y") }}</th>
+                    <th>
+                        {% if marque.logo is not null %}
+                            <img src="{{ asset('logos/' ~ marque.logo) }}" style="width:50px;" alt="{{ marque.nom }}">
+                        {% else %}
+                            <p>Aucun logo.</p>
+                        {% endif %}
+                    </th>
+                    <th>
+                        <a href="{{ path('app_marque_show',{'id':marque.id}) }}">
+                            👀
+                        </a>
+                        -
+                        <a href="{{ path('app_marque_edit',{'id':marque.id}) }}">
+                            ⚙️
+                        </a>
+                        -
+                        <a href="{{ path('app_marque_delete',{'id':marque.id}) }}">
+                            🗑️️
+                        </a>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune marque.</p>
+    {% endif %}
+    <br>
+    <hr>
+    <br>
+    <h4 class="text-center">Ajouter une marque</h4>
+
+    {{ form(ajout) }}
+
+{% endblock %}

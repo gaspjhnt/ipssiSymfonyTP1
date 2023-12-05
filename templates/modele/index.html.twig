@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Index Marque {% endblock %}
+
+{% block body %}
+    <h1>Liste des Modèles</h1>
+    {% if modeles is not empty%}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix de départ</th>
+                <th>Marque associée</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for modele in modeles %}
+                <tr>
+                    <th>
+                        {{ modele.nom }}
+                    </th>
+                    <th>{{ modele.prix }}</th>
+                    <th>
+                        <a href="{{ path('app_marque_show',{'id':modele.marque.id}) }}">
+                            {{ modele.marque.nom }}
+                        </a>
+                    </th>
+                    <th>
+
+                        <a href="{{ path('app_modele_show',{'id':modele.id}) }}">
+                            👀
+                        </a>
+                        -
+                        <a href="{{ path('app_modele_edit',{'id':modele.id}) }}">
+                            ⚙️
+                        </a>
+                        -
+                        <a href="{{ path('app_modele_delete',{'id':modele.id}) }}">
+                            🗑️️
+                        </a>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucun modèle.</p>
+    {% endif %}
+    <br>
+    <hr>
+    <br>
+    <h4 class="text-center">Ajouter un modèle</h4>
+
+    {{ form(ajout) }}
+
+{% endblock %}

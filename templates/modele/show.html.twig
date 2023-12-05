@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Marque {% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 30vw">
+        <div class="card-body">
+            <h1> {{ modele.nom }}</h1>
+            <p>Description => {{ modele.prix }}</p>
+            <p>Marque =>
+                <a href="{{ path('app_marque_show',{'id':modele.marque.id}) }}">
+                    {{ modele.marque.nom }}
+                </a>
+            </p>
+        </div>
+
+    </div>
+{% endblock %}

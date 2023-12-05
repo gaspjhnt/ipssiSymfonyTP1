@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Show Marque {% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 30vw">
+        {% if marque.logo is not null %}
+            <img src="{{ asset('logos/' ~ marque.logo) }}" style="width:50px;" alt="{{ marque.nom }}">
+        {% endif %}
+        <div class="card-body">
+            <h1> {{ marque.nom }}</h1>
+            <p>Description => {{ marque.dateDeCreation|date('d/m/y') }}</p>
+
+            {% if marque.modeles is not empty %}
+                <br>
+                <hr>
+                <br>
+                <h3>Modèles associés</h3>
+                {% for modele in marque.modeles %}
+                    <p>
+                        <a href="{{ path('app_modele_show',{'id':modele.id}) }}">
+                            {{ modele.nom }}
+                        </a>
+                    </p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+{% endblock %}
