@@ -86,6 +86,10 @@ class MarqueController extends AbstractController
                             $this->getParameter('upload_directory'),
                             $newFilename
                         );
+
+                        if ($marque->getLogo() != null){
+                            unlink($this->getParameter('upload_directory') . $marque->getLogo());
+                        }
                     } catch (FileException $e) {
                         $this->addFlash('danger', 'Erreur lors de l\'import de votre logo');
                     }
